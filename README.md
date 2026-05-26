@@ -1,6 +1,6 @@
 # doU
 
-**Date-stamped iterative goal execution. 6 passes. Zero config.**
+**Date-stamped iterative goal execution. 6 passes. Zero dependencies.**
 
 ```
 RUN `date` → goal-{date}.md → # ITERATION 0 → complete prompt → ITERATION +1 → repeat until ITERATION 5
@@ -8,9 +8,9 @@ RUN `date` → goal-{date}.md → # ITERATION 0 → complete prompt → ITERATIO
 
 ## What It Does
 
-`doU` is an agent skill standardization that forces iterative refinement through exactly 6 passes (ITERATION 0 through ITERATION 5). Each iteration:
+`doU` is an [Agent Skills](https://agentskills.io) standard skill that forces iterative refinement through exactly 6 passes (ITERATION 0 through ITERATION 5). Each iteration:
 
-1. Stamps the current date
+1. Stamps the current date via `date`
 2. Appends to a date-named goal file (`goal-May 26, 2026.md`)
 3. Completes the user/orchestrator prompt
 4. Advances the iteration counter
@@ -27,6 +27,45 @@ When an agent encounters `>doU`, it expands to:
 
 ```
 RUN `date` and append the date to a goal-May 26, 2026.md with a `# ITERATION 0` header; THEN complete the following prompt and iterate +1 upon completion until `ITERATION 5` -> """{USER_PROMPT}"""
+```
+
+## Installation
+
+### Pi / Claude Code / Codex / Any Agent Skills-compatible tool
+
+Copy or symlink the skill directory to any agent's skill discovery path:
+
+```bash
+# Cross-platform standard location (Pi, and others)
+cp -r .agents/skills/doU ~/.agents/skills/doU
+
+# Pi-specific
+cp -r .agents/skills/doU ~/.pi/agent/skills/doU
+
+# Claude Code
+cp -r .agents/skills/doU ~/.claude/skills/doU
+
+# OpenAI Codex
+cp -r .agents/skills/doU ~/.codex/skills/doU
+
+# Project-level (Pi discovers from cwd ancestors)
+cp -r .agents/skills/doU .agents/skills/doU
+```
+
+### Via Pi settings
+
+Add to `~/.pi/settings.json` or `.pi/settings.json`:
+
+```json
+{
+  "skills": ["path/to/doU/.agents/skills/doU"]
+}
+```
+
+### Via Pi CLI
+
+```bash
+pi --skill path/to/doU/.agents/skills/doU
 ```
 
 ## Usage
@@ -55,9 +94,17 @@ An orchestrator agent injects the target prompt into the `"""_"""` placeholder:
 >doU """{orchestrator_task}"""
 ```
 
-### Multiple goals in one session
+### Inline (no triple quotes)
 
-Each `>doU` invocation creates or appends to its own date-stamped file. Running two `doU` calls on the same day appends to the same file with distinct iteration chains.
+```
+>doU analyze this codebase for security vulnerabilities
+```
+
+### Pi skill command
+
+```
+/skill:doU """your prompt here"""
+```
 
 ## File Format
 
@@ -93,11 +140,9 @@ Mon May 26 14:43:55 EDT 2026
 Mon May 26 14:46:10 EDT 2026
 
 {final production-grade output}
+
+<!-- doU complete: 6 iterations -->
 ```
-
-## Skill Definition
-
-See [`skill.md`](skill.md) for the agent-consumable skill definition.
 
 ## Why 6 Iterations
 
@@ -112,6 +157,15 @@ See [`skill.md`](skill.md) for the agent-consumable skill definition.
 
 6 passes is enough to go from rough draft to production-grade without diminishing returns. Fewer passes leave gaps. More passes waste cycles.
 
+## Skill Structure
+
+```
+.agents/skills/doU/
+└── SKILL.md          # Agent Skills standard (agentskills.io)
+```
+
+Compliant with the [Agent Skills specification](https://agentskills.io/specification). Loads in Pi, Claude Code, OpenAI Codex, and any tool that implements the standard.
+
 ## License
 
-See [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE).
