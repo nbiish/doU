@@ -2,6 +2,8 @@
 
 **Date-stamped iterative goal execution. 6 passes. Zero dependencies.**
 
+[![install with skills](https://skills.sh/b/nbiish/doU)](https://skills.sh/nbiish/doU)
+
 ```
 RUN `date` → goal-{date}.md → # ITERATION 0 → complete prompt → ITERATION +1 → repeat until ITERATION 5
 ```
@@ -31,30 +33,68 @@ RUN `date` and append the date to a goal-May 26, 2026.md with a `# ITERATION 0` 
 
 ## Installation
 
-### Pi / Claude Code / Codex / Any Agent Skills-compatible tool
+### One-command install (50+ agents)
 
-Copy or symlink the skill directory to any agent's skill discovery path:
+The [skills CLI](https://github.com/vercel-labs/skills) (`npx skills`) auto-detects your installed agents and installs to all of them:
 
 ```bash
-# Cross-platform standard location (Pi, and others)
-cp -r .agents/skills/doU ~/.agents/skills/doU
+npx skills add nbiish/doU
+```
 
-# Pi-specific
+Install to a specific agent:
+
+```bash
+npx skills add nbiish/doU -a claude-code
+npx skills add nbiish/doU -a codex
+npx skills add nbiish/doU -a cursor
+npx skills add nbiish/doU -a pi
+npx skills add nbiish/doU -a github-copilot
+npx skills add nbiish/doU -a windsurf
+npx skills add nbiish/doU -a gemini-cli
+```
+
+Install globally:
+
+```bash
+npx skills add nbiish/doU -g
+```
+
+### Manual install (any agent)
+
+Copy or symlink the skill directory to your agent's discovery path:
+
+| Agent | Project path | Global path |
+|-------|-------------|-------------|
+| **Pi** | `.pi/skills/` | `~/.pi/agent/skills/` |
+| **Claude Code** | `.claude/skills/` | `~/.claude/skills/` |
+| **OpenAI Codex** | `.agents/skills/` | `~/.codex/skills/` |
+| **Cursor** | `.agents/skills/` | `~/.cursor/skills/` |
+| **GitHub Copilot** | `.agents/skills/` | `~/.copilot/skills/` |
+| **Windsurf** | `.windsurf/skills/` | `~/.codeium/windsurf/skills/` |
+| **Gemini CLI** | `.agents/skills/` | `~/.gemini/skills/` |
+| **Cline** | `.agents/skills/` | `~/.agents/skills/` |
+| **Goose** | `.goose/skills/` | `~/.config/goose/skills/` |
+| **Roo Code** | `.roo/skills/` | `~/.roo/skills/` |
+| **Warp** | `.agents/skills/` | `~/.agents/skills/` |
+| **Augment** | `.augment/skills/` | `~/.augment/skills/` |
+| **OpenCode** | `.agents/skills/` | `~/.config/opencode/skills/` |
+| **AiderDesk** | `.aider-desk/skills/` | `~/.aider-desk/skills/` |
+| **Devin** | `.devin/skills/` | `~/.config/devin/skills/` |
+| **Kiro** | `.kiro/skills/` | `~/.kiro/skills/` |
+| **Continue** | `.continue/skills/` | `~/.continue/skills/` |
+| **Junie** | `.junie/skills/` | `~/.junie/skills/` |
+| **Trae** | `.trae/skills/` | `~/.trae/skills/` |
+| **Any (universal)** | `.agents/skills/` | `~/.agents/skills/` |
+
+```bash
+# Example: manual install to Pi
 cp -r .agents/skills/doU ~/.pi/agent/skills/doU
 
-# Claude Code
-cp -r .agents/skills/doU ~/.claude/skills/doU
-
-# OpenAI Codex
-cp -r .agents/skills/doU ~/.codex/skills/doU
-
-# Project-level (Pi discovers from cwd ancestors)
+# Example: project-level (Pi auto-discovers from cwd)
 cp -r .agents/skills/doU .agents/skills/doU
 ```
 
 ### Via Pi settings
-
-Add to `~/.pi/settings.json` or `.pi/settings.json`:
 
 ```json
 {
@@ -66,6 +106,26 @@ Add to `~/.pi/settings.json` or `.pi/settings.json`:
 
 ```bash
 pi --skill path/to/doU/.agents/skills/doU
+```
+
+### Via package managers
+
+```bash
+# npm (agent-skills wrapper)
+npm install agent-skills
+
+# npm (Vercel skills CLI — 50+ agent support)
+npx skills add nbiish/doU
+
+# npm (rosie-skills — cross-platform skill package manager)
+npx rosie-skills add nbiish/doU
+```
+
+### Via Git clone
+
+```bash
+git clone https://github.com/nbiish/doU.git
+cp -r doU/.agents/skills/doU ~/.agents/skills/doU
 ```
 
 ## Usage
@@ -157,6 +217,12 @@ Mon May 26 14:46:10 EDT 2026
 
 6 passes is enough to go from rough draft to production-grade without diminishing returns. Fewer passes leave gaps. More passes waste cycles.
 
+## Supported Agents
+
+This skill works with any tool that implements the [Agent Skills](https://agentskills.io) specification. Full list of compatible agents (50+):
+
+AiderDesk · Amp · Antigravity · Augment · Bob · Claude Code · Cline · CodeArts Agent · CodeBuddy · Codemaker · Code Studio · Codex · Command Code · Continue · Cortex Code · Crush · Cursor · Deep Agents · Devin · Dexto · Droid · Firebender · ForgeCode · Gemini CLI · GitHub Copilot · Goose · Hermes Agent · iFlow CLI · Junie · Kilo Code · Kiro CLI · Kode · MCPJam · Mistral Vibe · Mux · OpenClaw · OpenCode · OpenHands · Pi · Pochi · Qoder · Qwen Code · Replit · Rovo Dev · Roo Code · Tabnine CLI · Trae · Universal · Warp · Windsurf · Zencoder · AdaL · Neovate
+
 ## Skill Structure
 
 ```
@@ -164,7 +230,18 @@ Mon May 26 14:46:10 EDT 2026
 └── SKILL.md          # Agent Skills standard (agentskills.io)
 ```
 
-Compliant with the [Agent Skills specification](https://agentskills.io/specification). Loads in Pi, Claude Code, OpenAI Codex, and any tool that implements the standard.
+Compliant with the [Agent Skills specification](https://agentskills.io/specification).
+
+## Distribution Channels
+
+| Channel | Install |
+|---------|---------|
+| **GitHub** | `git clone https://github.com/nbiish/doU` |
+| **skills CLI** | `npx skills add nbiish/doU` |
+| **skills.sh** | [![install with skills](https://skills.sh/b/nbiish/doU)](https://skills.sh/nbiish/doU) |
+| **rosie-skills** | `npx rosie-skills add nbiish/doU` |
+| **agent-skills (npm)** | `npm install agent-skills` |
+| **Manual** | Copy `.agents/skills/doU/` to any agent's skills directory |
 
 ## License
 
